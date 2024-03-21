@@ -23,7 +23,7 @@ class MainUiController extends React.Component<Props, State> {
 
   private showModal = async () => {
     this.setState({ ...this.state, isModalOpen: true });
-    await sleep(150_000);
+    await sleep(5_000);
     this.setState({
       ...this.state,
       isModalOpen: false,

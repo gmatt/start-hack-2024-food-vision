@@ -1,0 +1,24 @@
+/*.camera-page video::-webkit-media-controls {*/
+/*    display: none !important;*/
+/*}*/
+
+.camera-page {
+    position: relative;
+}
+
+.camera-page .camera-page__video {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+}
+
+.camera-page .main-ui-controller {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+}

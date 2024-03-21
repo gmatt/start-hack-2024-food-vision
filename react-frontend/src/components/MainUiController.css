@@ -1,0 +1,19 @@
+.main-ui-controller .main-ui-controller__history-box {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border: 1px solid green;
+    margin: 2px;
+}
+
+.main-ui-controller .main-ui-controller__history-box:first-child {
+    margin-left: 5px;
+}
+
+.main-ui-controller .main-ui-controller__history-box--detected {
+    background-color: green;
+}
+
+.main-ui-controller .main-ui-controller__history-box--not-detected {
+    background-color: red;
+}

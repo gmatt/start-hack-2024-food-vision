@@ -4,6 +4,7 @@
     display: inline-block;
     border: 1px solid green;
     margin: 2px;
+    opacity: 75%;
 }
 
 .main-ui-controller .main-ui-controller__history-box:first-child {

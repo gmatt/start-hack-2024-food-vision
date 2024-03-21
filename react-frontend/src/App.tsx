@@ -24,7 +24,7 @@ import SmartGlassView from "./pages/SmartGlassView";
 import CameraPage from "./pages/CameraPage";
 import MainUiController from "./components/MainUiController";
 
-setupIonicReact();
+setupIonicReact({ mode: "ios" });
 
 const App: React.FC = () => (
   <IonApp>

@@ -1,0 +1,26 @@
+.tracking-new-food-modal {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+    border: 1px solid gray;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.25);
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    min-width: 300px;
+}
+
+.tracking-new-food-modal img.tracking-new-food-modal__image {
+    mask-image: radial-gradient(circle, black 0, black 10%, rgba(0, 0, 0, 0.66) 20%, rgba(0, 0, 0, 0.33) 30%, transparent 45%, transparent 100%);
+}
+
+.tracking-new-food-modal ion-button:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s;
+}
+
+.tracking-new-food-modal .tracking-new-food-modal__gauges {
+    display: flex;
+    justify-content: space-between;
+}

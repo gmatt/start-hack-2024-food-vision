@@ -5,11 +5,13 @@ from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 
+from food_vision_backend.schemas.nutrition_info import NutritionInfo
 from food_vision_backend.smart_glass_demo.main import SmartGlassDemo
 
 
 class DemoState(BaseModel):
     predictionHistory: list[bool]
+    lastNutritionPrediction: Optional[NutritionInfo]
 
 
 demo: Optional[SmartGlassDemo] = None
@@ -32,4 +34,5 @@ app = FastAPI(lifespan=lifespan)
 async def get_state() -> DemoState:
     return DemoState(
         predictionHistory=demo.detection_history,
+        lastNutritionPrediction=demo.last_nutrition_prediction,
     )

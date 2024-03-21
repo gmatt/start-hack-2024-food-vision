@@ -20,7 +20,7 @@ def pil_to_base64(
     Converts Pillow image to base64 encoded string.
     """
     buffered = BytesIO()
-    image.save(buffered, format="JPEG")
+    image.convert("RGB").save(buffered, format="JPEG")
     img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
     return img_str
 
@@ -36,6 +36,7 @@ def get_openai_image_prediction(
     Requires `OPENAI_API_KEY` envvar to be set, or defined in `.env`.
     """
 
+    logging.info(prompt)
     # Source:
     # https://platform.openai.com/docs/guides/vision/multiple-image-inputs
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}

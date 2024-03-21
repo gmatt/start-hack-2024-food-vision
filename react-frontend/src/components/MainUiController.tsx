@@ -7,16 +7,9 @@ import TrackingNewFoodModal from "./TrackingNewFoodModal";
 interface Props {}
 
 class State {
-  predictionHistory: boolean[] = [false, true, false, false, true];
-  lastNutritionPrediction?: NutritionInfo = {
-    name: "Cheeseburger",
-    quantity: "150g",
-    calories: 300.0,
-    fat: 12.0,
-    protein: 15.0,
-    carb: 33.0,
-  };
-  isModalOpen: boolean = true;
+  predictionHistory: boolean[] = [];
+  lastNutritionPrediction?: NutritionInfo;
+  isModalOpen: boolean = false;
 }
 
 type BackendState = State;
@@ -25,7 +18,7 @@ class MainUiController extends React.Component<Props, State> {
   state = new State();
 
   componentDidMount() {
-    // this.tick();
+    this.tick();
   }
 
   private showModal = async () => {
@@ -39,16 +32,21 @@ class MainUiController extends React.Component<Props, State> {
   };
 
   tick = async () => {
-    const data: BackendState = await (await fetch("/api/getState")).json();
-    this.setState({
-      predictionHistory: data.predictionHistory,
-      lastNutritionPrediction: data.lastNutritionPrediction,
-      isModalOpen: this.state.isModalOpen,
-    });
-    if (this.state.lastNutritionPrediction != null) {
-      await this.showModal();
+    try {
+      const data: BackendState = await (await fetch("/api/getState")).json();
+      this.setState({
+        predictionHistory: data.predictionHistory,
+        lastNutritionPrediction: data.lastNutritionPrediction,
+        isModalOpen: this.state.isModalOpen,
+      });
+      if (this.state.lastNutritionPrediction != null) {
+        await this.showModal();
+      }
+      setTimeout(this.tick, 1000);
+    } catch {
+      setTimeout(this.tick, 1000);
+      return;
     }
-    setTimeout(this.tick, 1000);
   };
 
   render() {

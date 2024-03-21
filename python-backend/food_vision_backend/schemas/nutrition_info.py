@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 
+# https://github.com/google-research-datasets/Nutrition5k?tab=readme-ov-file#dish-metadata
 @dataclass
 class NutritionInfo:
     """

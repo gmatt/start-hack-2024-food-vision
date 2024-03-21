@@ -1,3 +1,5 @@
 body {
     background-color: transparent !important;
+    /* TODO Remove, just for debugging */
+    /*border: 1px solid red;*/
 }

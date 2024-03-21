@@ -1,4 +1,5 @@
 import base64
+import logging
 import os
 from io import BytesIO
 from typing import Optional
@@ -61,8 +62,6 @@ def get_openai_image_prediction(
         json=payload,
     )
     response.raise_for_status()
-
-    # TODO Remove, only for debugging.
-    print(response.text)
+    logging.info(response.text)
 
     return response.json()["choices"][0]["message"]["content"]

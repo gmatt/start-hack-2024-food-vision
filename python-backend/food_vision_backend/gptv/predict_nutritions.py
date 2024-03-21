@@ -1,21 +1,11 @@
-import inspect
 import json
 
 from PIL import Image
 from pyprojroot import here
 
+from food_vision_backend.gptv.prompt import prompt
 from food_vision_backend.gptv.util import get_openai_image_prediction
 from food_vision_backend.schemas.nutrition_info import NutritionInfo
-
-# Using field descriptions from the dataclass with inspect, so the descriptions don't
-# need to be repeated here. See descriptions in `NutritionInfo`.
-prompt = f"""
-Based on an image of a food or drink, predict the informal name of the consumable,
-predict its weight in g or volume in ml, and predict the macronutrient values.
-
-Answer only with a JSON containing the fields defined below:
-{inspect.getsource(NutritionInfo)}
-"""
 
 
 def clean_gpt4_answer(

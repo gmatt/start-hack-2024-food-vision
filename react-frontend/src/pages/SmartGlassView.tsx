@@ -1,11 +1,13 @@
 import React from "react";
-import './SmartGlassView.css';
+import "./SmartGlassView.css";
+import MainUiController from "../components/MainUiController";
+import { IonPage } from "@ionic/react";
 
 const SmartGlassView: React.FC = () => {
   return (
-    <div>
-      <div style={{fontSize: "20em", color: "black"}}>Hello</div>
-    </div>
+    <IonPage>
+      <MainUiController />
+    </IonPage>
   );
 };
 

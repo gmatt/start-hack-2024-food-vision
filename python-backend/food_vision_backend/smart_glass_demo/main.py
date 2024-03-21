@@ -5,7 +5,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
-import matplotlib.pyplot as plt
 from PIL import Image
 from pyprojroot import here
 

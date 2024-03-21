@@ -26,7 +26,7 @@ def pil_to_base64(
 
 
 def get_openai_image_prediction(
-    image: Image,
+    images: list[Image],
     prompt: str,
     max_tokens: Optional[int] = None,
 ) -> str:
@@ -35,7 +35,6 @@ def get_openai_image_prediction(
 
     Requires `OPENAI_API_KEY` envvar to be set, or defined in `.env`.
     """
-    base64_image = pil_to_base64(image)
 
     # Source:
     # https://platform.openai.com/docs/guides/vision/multiple-image-inputs
@@ -47,10 +46,15 @@ def get_openai_image_prediction(
                 "role": "user",
                 "content": [
                     {"type": "text", "text": prompt},
-                    {
-                        "type": "image_url",
-                        "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"},
-                    },
+                    *(
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{pil_to_base64(image)}"
+                            },
+                        }
+                        for image in images
+                    ),
                 ],
             }
         ],

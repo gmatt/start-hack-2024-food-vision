@@ -24,7 +24,7 @@ def predict_nutritions_form_image(
     image: Image,
 ) -> NutritionInfo:
     response = get_openai_image_prediction(
-        image=image,
+        images=[image],
         prompt=prompt,
     )
 

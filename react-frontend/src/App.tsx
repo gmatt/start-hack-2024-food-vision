@@ -21,6 +21,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import SmartGlassView from "./pages/SmartGlassView";
 
 setupIonicReact();
 
@@ -33,6 +34,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
+        </Route>
+        <Route exact path="/hud">
+          <SmartGlassView />
         </Route>
       </IonRouterOutlet>
     </IonReactRouter>

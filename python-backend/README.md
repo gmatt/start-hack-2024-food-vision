@@ -25,6 +25,12 @@ uvicorn food_vision_backend.api.main:app --reload
 
 Open http://127.0.0.1:8000/docs.
 
+## Smart Glasses Demo
+
+```bash
+uvicorn food_vision_backend.smart_glass_demo.api:app --reload
+```
+
 ## Streamlit
 
 ### Development

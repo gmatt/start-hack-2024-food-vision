@@ -13,13 +13,13 @@ class MainUiController extends React.Component<Props, State> {
   state = new State();
 
   componentDidMount() {
-    // this.tick();
+    this.tick();
   }
 
   tick = async () => {
-    const data: BackendState = await (await fetch("getState")).json();
+    const data: BackendState = await (await fetch("/api/getState")).json();
     this.setState({ predictionHistory: data.predictionHistory });
-    setTimeout(this.tick, 500);
+    setTimeout(this.tick, 1000);
   };
 
   render() {

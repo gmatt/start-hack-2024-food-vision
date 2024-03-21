@@ -1,28 +1,27 @@
+import io
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from PIL import Image
+from fastapi import FastAPI, File, UploadFile
 
-
-def fake_answer_to_everything_ml_model(x: float):
-    return x * 42
-
+from food_vision_backend.local_computer_vision.owl import OwlDetector
 
 ml_models = {}
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Load the ML model
-    ml_models["answer_to_everything"] = fake_answer_to_everything_ml_model
+    ml_models["owl"] = OwlDetector()
     yield
-    # Clean up the ML models and release the resources
     ml_models.clear()
 
 
 app = FastAPI(lifespan=lifespan)
 
 
-@app.get("/predict")
-async def predict(x: float):
-    result = ml_models["answer_to_everything"](x)
+@app.post("/predict")
+async def predict(image: UploadFile = File(...)):
+    request_object_content = await image.read()
+    img = Image.open(io.BytesIO(request_object_content))
+    result = ml_models["owl"].predict(img)
     return {"result": result}

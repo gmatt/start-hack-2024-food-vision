@@ -53,7 +53,7 @@ def get_openai_image_prediction(
                 ],
             }
         ],
-        **{{"max_tokens": max_tokens} if max_tokens else {}},
+        **({"max_tokens": max_tokens} if max_tokens else {}),
     }
     response = requests.post(
         "https://api.openai.com/v1/chat/completions",

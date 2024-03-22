@@ -1,0 +1,33 @@
+@keyframes example {
+    from {
+        rotate: -180deg;
+    }
+    to {
+        rotate: 0;
+    }
+}
+
+.gauge {
+    position: relative;
+}
+
+
+.gauge .gauge__gauge {
+    width: 150px;
+    aspect-ratio: 1;
+    display: inline-grid;
+    place-content: center;
+    margin: 5px;
+
+    animation-name: example;
+    animation-duration: 2s;
+}
+
+.gauge .gauge__text {
+    position: absolute;
+    top: 65px;
+    left: 0;
+    width: 160px;
+    text-align: center;
+    font-size: 20px;
+}

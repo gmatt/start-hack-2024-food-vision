@@ -1,19 +1,3 @@
-r"""Script to compute statistics on nutrition predictions.
-
-This script takes in a csv of nutrition predictions and computes absolute and
-percentage mean average error values comparable to the metrics used to eval
-models in the Nutrition5k paper. The input csv file of nutrition predictions
-should be in the form of:
-dish_id, calories, mass, carbs, protein
-And the groundtruth values will be pulled from the metadata csv file provided
-in the Nutrition5k dataset release where the first 5 fields are also:
-dish_id, calories, mass, carbs, protein
-
-Example Usage:
-python compute_statistics.py path/to/groundtruth.csv path/to/predictions.csv \
-path/to/output_statistics.json
-"""
-
 import json
 from os import path
 import statistics
@@ -21,7 +5,6 @@ import sys
 
 DISH_ID_INDEX = 0
 DATA_FIELDNAMES = ["dish_id", "calories", "mass", "fat", "carb", "protein"]
-
 
 def ReadCsvData(filepath):
   if not path.exists(filepath):
@@ -46,24 +29,36 @@ prediction_data = ReadCsvData(predictions_csv_path)
 
 groundtruth_values = {}
 err_values = {}
+residual_sums = {}
+total_sums = {}
 output_stats = {}
 
 for field in DATA_FIELDNAMES[1:]:
   groundtruth_values[field] = []
   err_values[field] = []
+  residual_sums[field] = []
+  total_sums[field] = []
+
+mean_groundtruth_values = {}
+
+for field in DATA_FIELDNAMES[1:]:
+  mean_groundtruth_values[field] = statistics.mean(
+      [float(groundtruth_data[dish_id][i]) for dish_id in groundtruth_data for i in range(1, len(DATA_FIELDNAMES)) if DATA_FIELDNAMES[i] == field])
 
 for dish_id in prediction_data:
   for i in range(1, len(DATA_FIELDNAMES)):
-    groundtruth_values[DATA_FIELDNAMES[i]].append(
-        float(groundtruth_data[dish_id][i]))
-    err_values[DATA_FIELDNAMES[i]].append(abs(
-        float(prediction_data[dish_id][i])
-        - float(groundtruth_data[dish_id][i])))
+    actual = float(groundtruth_data[dish_id][i])
+    predicted = float(prediction_data[dish_id][i])
+    groundtruth_values[DATA_FIELDNAMES[i]].append(actual)
+    err_values[DATA_FIELDNAMES[i]].append(abs(predicted - actual))
+    residual_sums[DATA_FIELDNAMES[i]].append((actual - predicted) ** 2)
+    total_sums[DATA_FIELDNAMES[i]].append((actual - mean_groundtruth_values[DATA_FIELDNAMES[i]]) ** 2)
 
 for field in DATA_FIELDNAMES[1:]:
   output_stats[field + "_MAE"] = statistics.mean(err_values[field])
   output_stats[field + "_MAE_%"] = (100 * statistics.mean(err_values[field]) /
                                     statistics.mean(groundtruth_values[field]))
+  output_stats[field + "_R^2"] = 1 - sum(residual_sums[field]) / sum(total_sums[field])
 
 with open(output_path, "w") as f_out:
   f_out.write(json.dumps(output_stats))

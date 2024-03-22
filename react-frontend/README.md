@@ -19,3 +19,6 @@ Open http://localhost:8100.
 
 Ionic enables to create native apps, but right now, we only use it as a React
 library.
+
+Open `/hud` with apple vision, or /home to use camera. The `MainUIController.tsx` is the
+main UI controller.

@@ -40,3 +40,9 @@ poetry run streamlit run food_vision_backend/streamlit/app.py --server.headless 
 ```
 
 Open http://localhost:8501/.
+
+## Eval
+```bash
+cd python-backend
+python food_vision_backend/eval/compute_eval_statistics.py ../data/nutrition5k/nutrition5k_dataset-metadata-dish_metadata_cafe1.csv food_vision_backend/eval/res.csv food_vision_backend/eval/output_statistics.json
+```

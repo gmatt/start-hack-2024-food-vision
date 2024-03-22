@@ -16,3 +16,6 @@ ionic serve
 ```
 
 Open http://localhost:8100.
+
+Ionic enables to create native apps, but right now, we only use it as a React
+library.

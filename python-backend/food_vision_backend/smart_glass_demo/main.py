@@ -8,8 +8,10 @@ from typing import Optional
 from PIL import Image
 from pyprojroot import here
 
-from food_vision_backend.gptv.predict_nutritions import predict_nutritions_form_image
-from food_vision_backend.gptv.util import get_openai_image_prediction
+from food_vision_backend.gpt4_vision.predict_nutritions import (
+    predict_nutritions_form_image,
+)
+from food_vision_backend.gpt4_vision.util import get_openai_image_prediction
 from food_vision_backend.local_computer_vision.owl import OwlDetector
 from food_vision_backend.schemas.nutrition_info import NutritionInfo
 

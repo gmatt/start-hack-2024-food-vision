@@ -3,8 +3,14 @@ import inspect
 import streamlit as st
 from PIL import Image
 
-from food_vision_backend.gptv.predict_nutritions import predict_nutritions_form_image
+from food_vision_backend.gpt4_vision.predict_nutritions import (
+    predict_nutritions_form_image,
+)
 from food_vision_backend.schemas.nutrition_info import NutritionInfo
+
+"""
+#  Food Vision Inference Endpoint
+"""
 
 file = st.file_uploader(
     "Upload Image of Food or Drink",

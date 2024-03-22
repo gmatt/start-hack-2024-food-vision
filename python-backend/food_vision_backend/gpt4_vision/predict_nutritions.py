@@ -3,8 +3,8 @@ import json
 from PIL import Image
 from pyprojroot import here
 
-from food_vision_backend.gptv.prompt import prompt
-from food_vision_backend.gptv.util import get_openai_image_prediction
+from food_vision_backend.gpt4_vision.prompt import prompt
+from food_vision_backend.gpt4_vision.util import get_openai_image_prediction
 from food_vision_backend.schemas.nutrition_info import NutritionInfo
 
 
